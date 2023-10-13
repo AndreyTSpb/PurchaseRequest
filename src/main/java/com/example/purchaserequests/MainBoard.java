@@ -62,12 +62,7 @@ public class MainBoard extends MainController implements Initializable {
      * Заполняем значения на сцене
      */
     public void setData(int idUser, int idRole, String loginUser) throws SQLException {
-        this.loginUser = loginUser;
-        this.idUser = idUser;
-        this.idRole = idRole;
-
-        openBtnDictory();
-
+        super.setData(idUser, idRole, loginUser);
         fillTableOrders();
         setupListener();
     }
@@ -127,13 +122,14 @@ public class MainBoard extends MainController implements Initializable {
         stage.show();
 
         //Set Data to FXML through controller
-        formViewOrder.setData(this.idOrder, this.idUser, this.idRole, this.loginUser);
+        formViewOrder.setData(this.idUser, this.idRole, this.loginUser, this.idOrder);
     }
 
     /**
      * Заполняем таблицу данными из БД
      */
     private void fillTableOrders(){
+
         this.data = FXCollections.observableArrayList();
 
         String query = "SELECT p_o.id AS id, " +

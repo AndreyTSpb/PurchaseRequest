@@ -120,111 +120,13 @@ public class FormViewOrder extends MainController implements Initializable {
     /**
      * Заполняем значения на сцене
      */
-    public void setData(int idRow, int idUser, int idRole, String loginUser) throws SQLException {
-        this.idOrder    = idRow;
-        this.idUser     = idUser;
-        this.idRole     = idRole;
-        this.loginUser  = loginUser;
-        openBtnDictory();
-        this.changeStatusInJob();// еняем статус и присваиваем менеджера
-
+    public void setData(int idUser, int idRole, String loginUser, int idRow) throws SQLException {
+        super.setData(idUser, idRole, loginUser, idRow);
+        this.changeStatusInJob();// Меняем статус и присваиваем менеджера
         /**
          * Заполнения данных по заказу из таблицы
          */
         this.getDataOrderV2();
-    }
-
-    /**
-     * Get data order
-     */
-    private void getDataOrder() throws SQLException {
-        String query = "SELECT p_o.id AS id, " +
-                "m.fio AS manager, " +
-                "m.email AS email_manager, " +
-                "c.customer AS customer, " +
-                "p_o.num_contract AS num_contract, " +
-                "p_o.dt_create AS dt_create, " +
-                "p_o.dt_desired AS dt_desired, " +
-                "mz.fio AS fio_z, " +
-                "mz.email AS email_z, " +
-                "p_o.dt_start_job AS dt_start_job, " +
-                "p_o.dt_close AS dt_close, " +
-                "p_o.note_menager AS note_menager, " +
-                "p_o.note_purchase AS note_purchase, " +
-                "(CASE p_o.status " +
-                "WHEN 1 THEN 'В работе' " +
-                "WHEN 2 THEN 'На утверждении' " +
-                "WHEN 3 THEN 'Выполнено' " +
-                "WHEN 4 THEN 'Отказано'" +
-                "ELSE 'Ожидает' " +
-                "END) AS status " +
-                "FROM `purchase_orders` AS p_o " +
-                "LEFT JOIN `managers` AS mz ON p_o.id_menager_z = mz.id " +
-                "LEFT JOIN `managers` AS m ON p_o.id_manager = m.id " +
-                "LEFT JOIN `customers` AS c ON p_o.id_client = c.id " +
-                "WHERE p_o.id = ?";
-
-        try(Connection conn = DBConnector.getConnection();
-            PreparedStatement stmt = conn.prepareStatement(query);){
-            stmt.setInt(1, this.idOrder);
-
-            try (ResultSet rez = stmt.executeQuery()) {
-                while (rez.next()) {
-                    /*Order manager*/
-                    this.nameManager.setText(rez.getString("manager"));
-                    this.emailManager.setText(rez.getString("email_manager"));
-                    this.nameCustomer.setText(rez.getString("customer"));
-                    this.numContract.setText(rez.getString("num_contract"));
-                    //this.dateDesired.setText(rez.getString("dt_desired"));
-                    this.dateDesired.setValue(LocalDate.parse(new SimpleDateFormat("yyyy-MM-dd").format(rez.getDate("dt_desired")) ));
-                    this.noteManager.setText(rez.getString("note_menager"));
-                    /*request purchase*/
-                    this.namePurManager.setText(rez.getString("fio_z"));
-                    this.emailPurManager.setText(rez.getString("email_z"));
-                    this.purchaseNote.setText(rez.getString("note_purchase"));
-
-                    /**
-                     * Проверка на статус заявки, для блокировки органов управления на форме
-                     * Ожидает:  блокируем вкладку менеджера по закупкам и подтверждение заявки
-                     * В работе:  Открывается вкладка для менеджера закупки
-                     * На утверждении:
-                     * Отказано:
-                     */
-                    switch (rez.getString("status")){
-                        case "Ожидает":
-                            this.tabPurchase.setDisable(true);
-                            this.deleteOrder.setDisable(false);
-                            this.updateOrder.setDisable(false);
-                            break;
-                        case "В работе":
-                            this.tabPurchase.setDisable(false);
-                            this.tabCommerc.setDisable(true);
-                            break;
-                        case "На утверждении":
-                            this.tabPurchase.setDisable(false);
-                            this.tabCommerc.setDisable(false);
-                            this.dateDelivery.setEditable(false);
-                            this.purchaseNote.setEditable(false);
-                            this.supplierCost.setEditable(false);
-                            this.pushBtnRequestOrder.setDisable(true);
-                            this.pushSendApprovalOrder.setDisable(true);
-                            break;
-                        default:
-                            this.deleteOrder.setDisable(true);
-                            this.updateOrder.setDisable(true);
-                            this.dateDelivery.setEditable(false);
-                            this.purchaseNote.setEditable(false);
-                            this.supplierCost.setEditable(false);
-                            this.pushBtnRequestOrder.setDisable(true);
-                            this.pushSendApprovalOrder.setDisable(true);
-                            break;
-                    }
-                    
-                }
-            }
-        } catch(SQLException e){
-            e.printStackTrace();
-        }
     }
 
     private void blockedElement(int status){

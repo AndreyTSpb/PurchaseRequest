@@ -40,6 +40,7 @@ public class DirectoryEmployeeTableController extends MainController implements 
 
     @FXML
     private TableColumn<Managers, Integer> id;
+    protected int idOrder;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -50,11 +51,8 @@ public class DirectoryEmployeeTableController extends MainController implements 
      * Заполняем значения на сцене
      */
     public void setData(int idUser, int idRole, String loginUser) throws SQLException {
-        this.idUser = idUser;
-        this.idRole = idRole;
-        this.loginUser = loginUser;
-        this.fieldTable();
-
+        super.setData(idUser, idRole, loginUser);
+        this.fieldTable(); //Заполняем таблицу
         setupListener(); //ставим слушателя на нажатие в таблице
     }
 
@@ -64,6 +62,7 @@ public class DirectoryEmployeeTableController extends MainController implements 
             public void handle(MouseEvent mouseEvent) {
                 if (mouseEvent.getClickCount() == 2) {
                     idOrder = tableEmployee.getSelectionModel().getSelectedItem().idProperty().getValue();
+
                     try {
                         viewManager(mouseEvent);
                     } catch (IOException e) {
@@ -87,7 +86,7 @@ public class DirectoryEmployeeTableController extends MainController implements 
         stage.show();
 
         //Set Data to FXML through controller
-        formCreateOrder.setData(this.idUser,this.idRole,this.loginUser, idOrder);
+        formCreateOrder.setData(this.idUser,this.idRole,this.loginUser, this.idOrder);
     }
 
     private void fieldTable(){

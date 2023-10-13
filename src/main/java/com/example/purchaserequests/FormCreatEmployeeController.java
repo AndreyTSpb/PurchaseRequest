@@ -36,17 +36,14 @@ public class FormCreatEmployeeController extends MainController implements Initi
     }
     @FXML
     public void setData(int idUser, int idRole, String loginUser, int idRow) throws SQLException {
-        this.idUser = idUser;
-        this.idRole = idRole;
-        this.loginUser = loginUser;
-        this.idRow = idRow;
+        super.setData(idUser, idRole, loginUser, idRow);
 
-
+        System.out.println(idRow);
         /**
          * Взависимости от того передан ли айди строки или нет
          * меняем поведение кнопки "сохранить"
          */
-        if(this.idRow > 0){
+        if(this.idOrder > 0){
             //Заполнение данных формы
             this.fillFormFields();
         }else{
@@ -80,7 +77,7 @@ public class FormCreatEmployeeController extends MainController implements Initi
         for(int i= 0; i<itemRoles.length; i++){
             this.role.getItems().add(itemRoles[i]);
         }
-        ManagerInfo managerInfo = new ManagerInfo(this.idRow);
+        ManagerInfo managerInfo = new ManagerInfo(this.idOrder);
         //Поля
         String[] partsFio = managerInfo.fio.split(" ");
         this.familia.setText(partsFio[0]);
@@ -123,7 +120,7 @@ public class FormCreatEmployeeController extends MainController implements Initi
             stmt.setString(3, this.login.getText());
             String role = (String) this.role.getValue();
             stmt.setInt(4, this.getIdRole(role));
-            stmt.setInt(5, this.idRow);
+            stmt.setInt(5, this.idOrder);
             stmt.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);

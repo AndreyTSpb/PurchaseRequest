@@ -25,7 +25,7 @@ public class MainController {
     protected int idUser;
     protected int idRole;
 
-    protected int idOrder;
+    public int idOrder; //строка в таблице
 
     /**
      * Пункт из меню выход
@@ -37,18 +37,33 @@ public class MainController {
     @FXML
     private MenuItem closeBtn;
 
-    public void openDirectoryRoles(ActionEvent actionEvent) throws IOException, SQLException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("directoryEmployeeTable.fxml"));
+    @FXML
+    public void openTableOrders(ActionEvent actionEvent) throws IOException, SQLException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("mainBoard.fxml"));
         Parent root = fxmlLoader.load();
 
-        DirectoryEmployeeTableController directoryEmployeeTableController = fxmlLoader.getController();
+        MainBoard mainBoard = fxmlLoader.getController();
+        //для работы с меню по другому обращаться к сцене
+        stage = (Stage) myMenuBar.getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+        //fill table
+        mainBoard.setData(this.idUser, this.idRole, this.loginUser);
+    }
+    @FXML
+    public void openDirectoryRoles(ActionEvent actionEvent) throws IOException, SQLException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("directoryRoleTable.fxml"));
+        Parent root = fxmlLoader.load();
+
+        DirectoryRolesTableController directoryRolesTableController = fxmlLoader.getController();
         //для работы с меню по другому обращаться к сцене
         this.stage = (Stage) myMenuBar.getScene().getWindow();
         this.scene = new Scene(root);
         this.stage.setScene(this.scene);
         this.stage.show();
         //fill table
-        directoryEmployeeTableController.setData(this.idUser, this.idRole, this.loginUser);
+        directoryRolesTableController.setData(this.idUser, this.idRole, this.loginUser);
     }
 
     /**
@@ -96,6 +111,22 @@ public class MainController {
     protected void openBtnDictory(){
         if(this.idRole == 1){
             this.employees.setDisable(false);
+            this.roles.setDisable(false);
         }
+    }
+
+    public void setData(int idUser, int idRole, String loginUser, int idRow) throws SQLException {
+        this.loginUser  = loginUser;
+        this.idUser     = idUser;
+        this.idRole     = idRole;
+        this.idOrder    = idRow;
+        openBtnDictory();
+    }
+
+    public void setData(int idUser, int idRole, String loginUser) throws SQLException {
+        this.loginUser = loginUser;
+        this.idUser = idUser;
+        this.idRole = idRole;
+        openBtnDictory();
     }
 }

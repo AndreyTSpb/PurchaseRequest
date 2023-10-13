@@ -21,7 +21,7 @@
         <menus>
           <Menu mnemonicParsing="false" text="Файл">
             <items>
-                <MenuItem fx:id="tableOrdersBtn" mnemonicParsing="false"  text="Заявки" />
+                <MenuItem fx:id="tableOrdersBtn" mnemonicParsing="false" onAction="#openTableOrders" text="Заявки" />
                 <MenuItem fx:id="closeBtn" mnemonicParsing="false" onAction="#closeBtnClick" text="Выйти" />
             </items>
           </Menu>

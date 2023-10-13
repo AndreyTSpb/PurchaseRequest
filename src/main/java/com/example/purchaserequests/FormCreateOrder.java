@@ -66,10 +66,7 @@ public class FormCreateOrder extends MainController implements Initializable {
      * Заполняем значения формы
      */
     public void setData(int idUser, int idRole, String loginUser) throws SQLException {
-        this.loginUser = loginUser;
-        this.idUser = idUser;
-        this.idRole = idRole;
-        openBtnDictory();
+        super.setData(idUser,idRole,loginUser);
 
         /**
          * Зополняем выподающий списоок
