@@ -1,0 +1,72 @@
+.button:hover {
+    -fx-background-color: #383838!important;
+    -fx-border-color: #383838!important;
+    -fx-text-fill: #fff!important;
+}
+
+.button:pressed {
+    -fx-scale-y: 0.95;
+    -fx-scale-x: 0.95;
+}
+
+.my-red-btns{
+    -fx-pref-width: 175px;
+    -fx-pref-height: 30px;
+    -fx-background-color: #f7746a;
+    -fx-border-color: #f7746a;
+    -fx-border-radius: 5px;
+    -fx-text-fill: #FAFAFA;
+    -fx-padding: 5px;
+}
+.my-grey-btns{
+    -fx-pref-width: 175px;
+    -fx-pref-height: 30px;
+    -fx-background-color:  #FAFAFA;
+    -fx-border-color:  #CCCCCC;
+    -fx-border-radius: 5px;
+    -fx-text-fill: #000000;
+    -fx-padding: 5px;
+}
+.my-yellow-btns{
+    -fx-pref-width: 175px;
+    -fx-pref-height: 30px;
+    -fx-background-color: #ffdc2d;
+    -fx-border-color: #eac406;
+    -fx-border-radius: 5px;
+    -fx-padding: 5px;
+    -fx-text-fill: #000000;
+}
+
+.my-yellow-btns:hover{
+    -fx-pref-width: 175px;
+    -fx-pref-height: 30px;
+    -fx-background-color: #000000;
+    -fx-border-color: #eac406;
+    -fx-border-radius: 5px;
+    -fx-padding: 5px;
+    -fx-text-fill: #ffdc2d;
+}
+
+.my-table{
+
+}
+
+.search-panel{
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #ffdc2d;
+    -fx-border-radius: 5px;
+    -fx-padding: 4px;
+}
+.select-input{
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #ffdc2d;
+    -fx-border-radius: 5px;
+}
+.my-text-input{
+    -fx-pref-height: 35px;
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #eac406;
+    -fx-border-radius: 5px;
+    -fx-padding: 5px;
+    -fx-text-fill: #000000;
+}
