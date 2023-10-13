@@ -25,8 +25,8 @@
                 </Menu>
                 <Menu mnemonicParsing="false" text="Справочники">
                     <items>
-                        <MenuItem fx:id="employees" disable="true" mnemonicParsing="false" text="Сотрудники" />
-                        <MenuItem fx:id="roles" disable="true" mnemonicParsing="false" text="Роли" />
+                        <MenuItem fx:id="employees" disable="true" mnemonicParsing="false" onAction="#openDirectoryEmployee" text="Сотрудники" />
+                        <MenuItem fx:id="roles" disable="true" mnemonicParsing="false" onAction="#openDirectoryRoles" text="Роли" />
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Help">

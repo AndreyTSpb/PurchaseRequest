@@ -53,7 +53,7 @@ public class MainController {
     }
     @FXML
     public void openDirectoryRoles(ActionEvent actionEvent) throws IOException, SQLException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("directoryRoleTable.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("directoryRolesTable.fxml"));
         Parent root = fxmlLoader.load();
 
         DirectoryRolesTableController directoryRolesTableController = fxmlLoader.getController();

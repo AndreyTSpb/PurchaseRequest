@@ -40,7 +40,6 @@ public class DirectoryEmployeeTableController extends MainController implements 
 
     @FXML
     private TableColumn<Managers, Integer> id;
-    protected int idOrder;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
