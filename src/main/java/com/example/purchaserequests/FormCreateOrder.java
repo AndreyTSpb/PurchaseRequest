@@ -44,12 +44,6 @@ public class FormCreateOrder extends MainController implements Initializable {
     @FXML
     private TextArea noteManager;
 
-    @FXML
-    public void closeBtnClick(ActionEvent actionEvent) {
-        Platform.exit();
-        System.exit(0);
-    }
-
 
 
     /**

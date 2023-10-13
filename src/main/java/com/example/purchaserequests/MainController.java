@@ -33,10 +33,22 @@ public class MainController {
     @FXML
     public MenuBar myMenuBar;
     @FXML
+    public MenuItem tableOrdersBtn;
+    @FXML
     private MenuItem closeBtn;
 
-    public void openDirectoryRoles(ActionEvent actionEvent) {
-        //
+    public void openDirectoryRoles(ActionEvent actionEvent) throws IOException, SQLException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("directoryEmployeeTable.fxml"));
+        Parent root = fxmlLoader.load();
+
+        DirectoryEmployeeTableController directoryEmployeeTableController = fxmlLoader.getController();
+        //для работы с меню по другому обращаться к сцене
+        this.stage = (Stage) myMenuBar.getScene().getWindow();
+        this.scene = new Scene(root);
+        this.stage.setScene(this.scene);
+        this.stage.show();
+        //fill table
+        directoryEmployeeTableController.setData(this.idUser, this.idRole, this.loginUser);
     }
 
     /**
