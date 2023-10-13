@@ -35,6 +35,8 @@ public class MainController {
     @FXML
     public MenuItem tableOrdersBtn;
     @FXML
+    public MenuItem updateCustomers;
+    @FXML
     private MenuItem closeBtn;
 
     @FXML
@@ -128,5 +130,11 @@ public class MainController {
         this.idUser = idUser;
         this.idRole = idRole;
         openBtnDictory();
+    }
+
+    public void updateCustomers(ActionEvent actionEvent) {
+        System.out.println("tyt");
+        UpdateCustomersTable upCT = new UpdateCustomersTable();
+
     }
 }

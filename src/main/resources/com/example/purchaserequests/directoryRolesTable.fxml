@@ -27,6 +27,7 @@
                     <items>
                         <MenuItem fx:id="employees" disable="true" mnemonicParsing="false" onAction="#openDirectoryEmployee" text="Сотрудники" />
                         <MenuItem fx:id="roles" disable="true" mnemonicParsing="false" onAction="#openDirectoryRoles" text="Роли" />
+                        <MenuItem fx:id="updateCustomers" mnemonicParsing="false" onAction="#updateCustomers" text="Обновить клиентов" />
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Help">
