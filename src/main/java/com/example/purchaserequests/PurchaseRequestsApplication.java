@@ -21,8 +21,11 @@ public class PurchaseRequestsApplication extends Application {
         stage.setTitle("Список заявок в закупку!");
         stage.setScene(scene);
         stage.show();
-        //Set Data to FXML through controller
-        String loginUser = "spb.tav";
+
+        //получение данных о пользователе компьютера
+        GetDataUserAD userAD = new GetDataUserAD();
+        String loginUser = userAD.userName;
+
         /**
          * Получаем данные о пользователе
          */

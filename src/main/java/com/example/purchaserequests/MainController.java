@@ -9,6 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -18,6 +19,7 @@ public class MainController {
     protected Stage stage;
     protected Scene scene;
     protected Parent root;
+    protected Stage waitDialog;
     public MenuItem employees;
     public MenuItem roles;
 
@@ -132,9 +134,29 @@ public class MainController {
         openBtnDictory();
     }
 
-    public void updateCustomers(ActionEvent actionEvent) {
-        System.out.println("tyt");
+    public void updateCustomers(ActionEvent actionEvent) throws IOException {
+        waitWindows();
         UpdateCustomersTable upCT = new UpdateCustomersTable();
+        if(upCT.result){
+            this.waitDialog.close();
+        }
+    }
 
+    /**
+     * Окошко ожидания обновления
+     * @throws IOException
+     */
+    public void waitWindows() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("wait.fxml"));
+        Parent root = fxmlLoader.load();
+        Scene scene = new Scene(root, 200, 200);
+        this.waitDialog = new Stage();
+        this.waitDialog.setHeight(200);
+        this.waitDialog.setWidth(200);
+        this.waitDialog.setTitle("Обновление...");
+        this.waitDialog.setScene(scene);
+        this.waitDialog.initOwner(this.stage);
+        this.waitDialog.initModality(Modality.APPLICATION_MODAL);
+        this.waitDialog.showAndWait();
     }
 }

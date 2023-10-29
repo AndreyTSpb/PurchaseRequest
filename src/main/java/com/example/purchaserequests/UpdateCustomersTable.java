@@ -7,6 +7,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class UpdateCustomersTable {
+    public Boolean result;
+
     public UpdateCustomersTable(){
         try {
             URL url = new URL("http://localhost/updateCustomers.php");
@@ -26,9 +28,10 @@ public class UpdateCustomersTable {
             try (BufferedReader br = new BufferedReader(new InputStreamReader(
                     conn.getInputStream())))
             {
+
                 String line;
                 while ((line = br.readLine()) != null) {
-                    System.out.println(line);
+                    this.result = line.equals("true"); //возвращает результат обновления
                 }
             }
         } catch (Exception e) {

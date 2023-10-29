@@ -176,6 +176,18 @@ public class MainBoard extends MainController implements Initializable {
                     case "dt_create":
                         column.setText("Дата заказа");
                         break;
+                    case "dt_desired":
+                        column.setText("Желаемая дата");
+                        break;
+                    case "dt_start_job":
+                        column.setText("Принято в работу");
+                        break;
+                    case "dt_close":
+                        column.setText("Дата завершения");
+                        break;
+                    case "status":
+                        column.setText("Статус");
+                        break;
                     case "fio":
                         column.setText("Менеджер");
                         break;

@@ -4,6 +4,7 @@ module com.example.purchaserequests {
 
     requires org.kordamp.bootstrapfx.core;
     requires java.sql;
+    requires jdk.security.auth;
 
     opens com.example.purchaserequests to javafx.fxml;
     exports com.example.purchaserequests;

@@ -38,7 +38,6 @@ public class FormCreatEmployeeController extends MainController implements Initi
     public void setData(int idUser, int idRole, String loginUser, int idRow) throws SQLException {
         super.setData(idUser, idRole, loginUser, idRow);
 
-        System.out.println(idRow);
         /**
          * Взависимости от того передан ли айди строки или нет
          * меняем поведение кнопки "сохранить"
@@ -89,7 +88,7 @@ public class FormCreatEmployeeController extends MainController implements Initi
 
         //События на кнопку
         this.btnAddEmployee.setText("Обновить");
-        btnAddEmployee.setOnAction(event -> {
+        this.btnAddEmployee.setOnAction(event -> {
             this.updateEmployee();
             try {
                 //возврвт в список пользователей
